@@ -9,7 +9,6 @@ use crate::app::utils::subscription;
 
 #[derive(Debug)]
 pub struct App {
-    pub stream_value: usize,
     pub video: Video,
     pub video_is_playing: bool,
     pub video_is_looping: bool,
@@ -17,7 +16,6 @@ pub struct App {
 impl Default for App {
     fn default() -> Self {
         App {
-            stream_value: 0,
             video: Video::new(
                 &url::Url::from_file_path(
                     std::env::current_dir()
