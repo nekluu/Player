@@ -70,7 +70,7 @@ impl App {
                     Task::none()
                 }
             }
-            _ => Task::none(),
+            Message::NewFrame => Task::none(),
         }
     }
 
