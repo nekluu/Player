@@ -5,4 +5,5 @@ pub enum Message {
     TogglePause,
     ToggleLoop,
     Event(Event),
+    NewFrame,
 }
