@@ -39,26 +39,38 @@ impl App {
     }
     pub fn update(&mut self, message: Message) -> Task<Message> {
         match message {
-            Message::TogglePause => {self.video.set_paused(!self.video_is_playing);
-            Task::none()
+            Message::TogglePause => {
+                self.video_is_playing = !self.video_is_playing;
+                self.video.set_paused(!self.video_is_playing);
+                Task::none()
             }
-            Message::ToggleLoop =>  {self.video.set_looping(self.video_is_looping);
-            Task::none()
+            Message::ToggleLoop => {
+                self.video.set_looping(self.video_is_looping);
+                Task::none()
             }
 
             Message::Event(event) => {
-                if let iced::Event::Keyboard(event) = event {
-                    match event {
-                        iced::keyboard::Event::KeyPressed{key,..} => {
-                            self.video_is_playing = !self.video_is_playing;
-                            Task::done(Message::TogglePause)}
-                        iced::keyboard::Event::KeyReleased {key,..} => {println!("released: {:?}",key);
-                        Task::none()}
-                        iced::keyboard::Event::ModifiersChanged(modifiers) => {println!();
-                        Task::none()}
+                if let iced::Event::Keyboard(kbd_event) = event {
+                    match kbd_event {
+                        iced::keyboard::Event::KeyPressed { key, .. } => {
+                            if let iced::keyboard::Key::Named(iced::keyboard::key::Named::Space) = key {
+                                return Task::done(Message::TogglePause);
+                            }
+                            Task::none()
+                        }
+                        iced::keyboard::Event::KeyReleased { key, .. } => {
+                            println!("released: {:?}", key);
+                            Task::none()
+                        }
+                        iced::keyboard::Event::ModifiersChanged(_) => {
+                            Task::none()
+                        }
                     }
-                } else { Task::none() }
+                } else {
+                    Task::none()
+                }
             }
+            _ => Task::none(),
         }
     }
 
