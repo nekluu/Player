@@ -1,4 +1,6 @@
 use iced::futures::{Stream, stream};
+use iced::Subscription;
+use crate::app::Message;
 
 pub fn stream_logic() -> impl Stream<Item = usize> {
     let counter = 0;
@@ -11,4 +13,7 @@ pub fn stream_logic() -> impl Stream<Item = usize> {
             Some((state, state))
         }
     })
+}
+pub fn subscription() -> Subscription<Message> {
+    iced::event::listen().map(Message::Event)
 }

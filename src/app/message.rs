@@ -1,5 +1,8 @@
-#[derive(Clone, Copy, Debug)]
+use iced::Event;
+
+#[derive(Clone, Debug)]
 pub enum Message {
-    Start,
-    Data(usize),
+    TogglePause,
+    ToggleLoop,
+    Event(Event),
 }
