@@ -1,4 +1,4 @@
-use iced::widget::{button, column, text, Container};
+use iced::widget::{button, column, text};
 use iced::{Alignment::Center, Element, Length::Fill};
 use iced_video_player::VideoPlayer;
 use crate::app::{App, message::Message};
@@ -14,6 +14,5 @@ pub fn view(app: &App) -> Element<'_, Message> {
         .align_y(Center)
         .width(Fill)
         .height(Fill);
-
     column![video].into()
 }
