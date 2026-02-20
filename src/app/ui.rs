@@ -1,4 +1,4 @@
-use iced::widget::{button, column, text};
+use iced::widget::{column,Container};
 use iced::{Alignment::Center, Element, Length::Fill};
 use iced_video_player::VideoPlayer;
 use crate::app::{App, message::Message};
